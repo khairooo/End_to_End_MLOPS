@@ -13,7 +13,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: Build The Docker Image
       run: docker build . --file DockerFile --tag workflow-test:$(date +%s)
-  build-and-test: # CI part of Build and test 
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -47,13 +47,13 @@ jobs:
       uses: docker/setup-buildx-action@v2
 
     - name: Login to DockerHub
-      uses: docker/login-action@v2s
+      uses: docker/login-action@v2
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
-        #password: ${{ secrets.DOCKER_PASSWORD }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build and push Docker image
-      uses: docker/build-push-action@v4
+      uses: docker/build-push-action@v2
       with:
         context: .
         file: ./DockerFile
