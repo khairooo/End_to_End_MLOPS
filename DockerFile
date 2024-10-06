@@ -1,0 +1,17 @@
+# Use the offcial  Python image from the Docker Hub
+FROM python:3.9
+
+# Set the working DIrectory
+WORKDIR /app
+
+# Copy the current directory content to the container at /app
+COPY . /app
+
+# Install any needed packages specified in the requirements.txt
+RUN pip install requirements.txt
+
+# Make port 5000 available on TJE World outside of the container 
+EXPOSE 5000
+
+#Run app.py when the container launches 
+CMD ["python" "app.py"]
